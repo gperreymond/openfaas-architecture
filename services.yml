@@ -1,0 +1,11 @@
+version: 1.0
+
+provider:
+  name: openfaas
+  gateway: http://openfaas.docker.localhost
+
+functions:
+  analysis-order-command:
+    lang: node12
+    handler: ./services/analysis-order-command
+    image: gperreymond/analysis-order-command:latest

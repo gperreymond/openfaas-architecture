@@ -69,7 +69,7 @@ __Install faas-cli__
 curl -sSL https://cli.openfaas.com | sudo sh
 ```
 
-__Usage__
+__OpenFaas: Login__
 
 ```sh
 export OPENFAAS_URL=http://openfaas.docker.localhost
