@@ -77,6 +77,10 @@ export OPENFAAS_URL=http://openfaas.docker.localhost
 faas-cli login -u infra --password infra
 ```
 
+__OpenFaas: links__
+
+- https://github.com/openfaas/templates/tree/master/template
+
 ### Rabbitmq
 
 - https://hub.helm.sh/charts/bitnami/rabbitmq
