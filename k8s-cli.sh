@@ -18,7 +18,11 @@ openfaas () {
     install)
       setup
       kubectl apply -f kubernetes/openfaas/namespaces.yaml
+      kubectl --namespace openfaas create secret generic basic-auth --from-literal=basic-auth-user=infra --from-literal=basic-auth-password=infra
       helm install openfaas openfaas/openfaas --values kubernetes/openfaas/values.yaml --namespace openfaas
+      kubectl apply -f kubernetes/openfaas/service.yaml --namespace openfaas
+      kubectl apply -f kubernetes/openfaas/ingress.yaml --namespace openfaas
+      nslookup openfaas.docker.localhost $(minikube ip)
       ;;
     upgrade)
       setup
@@ -26,6 +30,9 @@ openfaas () {
       ;;
     delete)
       helm delete openfaas
+      kubectl delete --namespace openfaas secret basic-auth
+      kubectl delete -f kubernetes/openfaas/service.yaml --namespace openfaas
+      kubectl delete -f kubernetes/openfaas/ingress.yaml --namespace openfaas
       kubectl delete -f kubernetes/openfaas/namespaces.yaml
       ;;
     *)
