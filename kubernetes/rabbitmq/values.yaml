@@ -1,0 +1,7 @@
+rabbitmq:
+  username: infra
+  password: infra
+  erlangCookie: infra
+
+metrics:
+  enabled: true
