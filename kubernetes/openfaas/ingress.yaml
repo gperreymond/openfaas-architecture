@@ -10,6 +10,6 @@ spec:
     http:
       paths:
       - backend:
-          serviceName: openfaas-svc
-          servicePort: 31112
+          serviceName: gateway
+          servicePort: 8080
         path: /

@@ -1,7 +1,5 @@
 # Infrastructure
 
-!!!!! __YOU NEED TO BE ON ROOT PROJECT DIRECTORY__ !!!!!
-
 ## 1) First Minikube baby!
 
 - https://kubernetes.io/docs/tasks/tools/install-minikube/

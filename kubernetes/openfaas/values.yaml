@@ -8,7 +8,6 @@ faasnetes:
     timeoutSeconds: 1
     periodSeconds: 1
   functionNamespace: openfaas-fn
-  serviceType: LoadBalancer
   gateway:
     replicas: 2
   queueWorker:
