@@ -1,8 +1,8 @@
 {
-  "name": "analysis-order-command",
-  "version": "1.0.0",
+  "name": "dummy-service",
+  "version": "0.0.1",
   "description": "",
-  "main": "handler.js",
+  "main": "index.js",
   "scripts": {
     "standard": "standard",
     "standard:fix": "standard --fix",
@@ -11,13 +11,8 @@
   "contributors": [
     "Gilles Perreymond <gperreymond@gmail.com>"
   ],
-  "private": true,
   "license": "UNLICENSED",
   "dependencies": {
-    "@hapi/boom": "8.0.1",
-    "@hapi/hapi": "18.4.0",
-    "@hapi/joi": "16.1.8",
-    "moleculer": "0.13.12"
   },
   "devDependencies": {
     "standard": "14.3.1"

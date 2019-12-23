@@ -5,7 +5,7 @@ provider:
   gateway: http://openfaas.docker.localhost
 
 functions:
-  analysis-order-command:
-    lang: node12
-    handler: ./services/analysis-order-command
-    image: gperreymond/analysis-order-command:latest
+  dummy-service:
+    lang: dockerfile
+    handler: ./services/dummy-service/
+    image: gperreymond/dummy-service:latest

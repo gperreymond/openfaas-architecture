@@ -1,6 +1,0 @@
-.DS_Store
-Dockerfile
-yarn.lock
-yarn-error.log
-
-node_modules
