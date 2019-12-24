@@ -54,22 +54,19 @@ curl https://raw.githubusercontent.com/kubernetes/helm/master/scripts/get-helm-3
 
 ### OpenFaas
 
-- https://hub.helm.sh/charts/openfaas/openfaas
-
 ```sh
 ./k8s-cli openfaas {install|upgrade|delete|info}
 ```
-__webui__
+__helm__: https://hub.helm.sh/charts/openfaas/openfaas  
+__webui__: http://openfaas.docker.localhost/
 
-- http://openfaas.docker.localhost/
-
-__Install faas-cli__
+__faas-cli__: install
 
 ```sh
 curl -sSL https://cli.openfaas.com | sudo sh
 ```
 
-__OpenFaas: Login__
+__faas-cli__: login
 
 ```sh
 export OPENFAAS_URL=http://openfaas.docker.localhost
@@ -77,17 +74,16 @@ export OPENFAAS_URL=http://openfaas.docker.localhost
 faas-cli login -u infra --password infra
 ```
 
-__OpenFaas: links__
-
-- https://github.com/openfaas/templates/tree/master/template
+### Nats
+```sh
+./k8s-cli nats {install|upgrade|delete|info}
+```
+__helm__: https://hub.helm.sh/charts/bitnami/nats  
+__webui__: http://nats.docker.localhost/
 
 ### Rabbitmq
-
-- https://hub.helm.sh/charts/bitnami/rabbitmq
-
 ```sh
 ./k8s-cli rabbitmq {install|upgrade|delete|info}
 ```
-__webui__
-
-- http://rabbitmq.docker.localhost/
+__helm__: https://hub.helm.sh/charts/bitnami/rabbitmq  
+__webui__: http://rabbitmq.docker.localhost/

@@ -7,5 +7,8 @@ provider:
 functions:
   dummy-service:
     lang: dockerfile
-    handler: ./services/dummy-service/
     image: gperreymond/dummy-service:latest
+    handler: domains/dummy
+    annotations:
+      com.openfaas.health.http.path: "/~node/health"
+      com.openfaas.health.http.initialDelay: "30s"

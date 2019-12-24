@@ -39,6 +39,29 @@ openfaas () {
   esac
 }
 
+nats () {
+  case "$1" in
+    info)
+      kubectl --namespace=nats get all
+      ;;
+    install)
+      setup
+      kubectl apply -f kubernetes/nats/namespaces.yaml
+      helm install nats bitnami/nats --values kubernetes/nats/values.yaml --namespace nats
+      ;;
+    upgrade)
+      helm upgrade nats bitnami/nats --values kubernetes/nats/values.yaml --namespace nats
+      ;;
+    delete)
+      helm delete nats
+      kubectl delete -f kubernetes/nats/namespaces.yaml
+      ;;
+    *)
+      echo $"Usage: {install|upgrade|delete|info}"
+      exit 1
+  esac
+}
+
 rabbitmq () {
   case "$1" in
     info)
@@ -73,11 +96,16 @@ case "$1" in
 
   all)
     openfaas $2
+    nats $2
     rabbitmq $2
     ;;
 
   openfaas)
     openfaas $2
+    ;;
+
+  nats)
+    nats $2
     ;;
 
   rabbitmq)
