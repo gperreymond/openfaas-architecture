@@ -91,3 +91,5 @@ __webui__: http://nats.docker.localhost/
 ```
 __helm__: https://hub.helm.sh/charts/bitnami/rabbitmq  
 __webui__: http://rabbitmq.docker.localhost/
+
+## 4) Metrics: Grafana & Prometheus
