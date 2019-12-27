@@ -17,13 +17,17 @@ sudo chown -R $USER:$USER ~/.minikube
 sudo minikube start --vm-driver=none
 kubectl config use-context minikube
 
-# warning: addons to enable
-minikube addons enable ingress
+# warning: minikube addons
+minikube addons disable ingress
 minikube addons enable ingress-dns
-# verify addons enabled
+# verify addons list status
 minikube addons list
 
+# deploy standalone nginx ingress controller to minikube
+https://skryvets.com/blog/2019/04/09/exposing-tcp-and-udp-services-via-ingress-on-minikube/
+
 # expose on localhost
+kubectl apply -f kubernetes/ingress-nginx.yaml
 kubectl expose deployment nginx-ingress-controller -n kube-system --target-port=80 --type=NodePort
 
 # look the minikube ip

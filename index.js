@@ -1,10 +1,26 @@
 const { ServiceBroker } = require('moleculer')
 const ApiService = require('moleculer-web')
 
+const configuration = {
+  moleculer: {
+    metrics: false,
+    logger: true,
+    validation: true,
+    transporter: {
+      type: 'AMQP',
+      options: {
+        url: 'amqp://infra:infra@rabbitmq.docker.localhost:5672',
+        eventTimeToLive: 5000,
+        prefetch: 1,
+        // If true, queues will be autodeleted once service is stopped, i.e., queue listener is removed
+        autoDeleteQueues: true
+      }
+    }
+  }
+}
+
 const broker = new ServiceBroker({
-  metrics: false,
-  logger: true,
-  validation: true,
+  ...configuration.moleculer,
   async started () {
     broker.logger.warn('Broker started')
   },

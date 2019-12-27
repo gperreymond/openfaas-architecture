@@ -8,5 +8,8 @@
     "moleculer": "0.13.12",
     "moleculer-web": "0.8.5",
     "standard": "14.3.1"
+  },
+  "dependencies": {
+    "amqplib": "0.5.5"
   }
 }
