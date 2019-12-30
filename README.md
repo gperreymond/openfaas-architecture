@@ -8,3 +8,4 @@ OpenFaaS® makes it simple to deploy both functions and existing code to Kuberne
 
 * [INSTALL MINIKUBE](./docs/1.MINIKUBE.md)
 * [INSTALL HELM](docs/2.HELM.md)
+* [INSTALL CHARTS](docs/3.CHARTS.md)

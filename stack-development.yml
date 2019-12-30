@@ -10,7 +10,7 @@ functions:
     image: gperreymond/dummy-service:latest
     handler: domains/dummy
     environment:
-      APP_RABBITMQ_URI: amqp://infra:infra@rabbitmq.rabbitmq:5672
+      APP_RABBITMQ_URI: amqp://infra:infra@rabbitmq.rabbitmq.svc.cluster.local:5672
     annotations:
       com.openfaas.health.http.path: "/~node/health"
       com.openfaas.health.http.initialDelay: "30s"
