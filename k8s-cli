@@ -21,7 +21,6 @@ openfaas () {
       kubectl --namespace openfaas create secret generic basic-auth --from-literal=basic-auth-user=infra --from-literal=basic-auth-password=infra
       helm install openfaas openfaas/openfaas --values kubernetes/openfaas/values.yaml --namespace openfaas
       kubectl apply -f kubernetes/openfaas/ingress.yaml --namespace openfaas
-      nslookup openfaas.docker.localhost $(minikube ip)
       ;;
     upgrade)
       setup
@@ -72,7 +71,6 @@ rabbitmq () {
       kubectl apply -f kubernetes/rabbitmq/namespaces.yaml
       helm install rabbitmq bitnami/rabbitmq --values kubernetes/rabbitmq/values.yaml --namespace rabbitmq
       kubectl apply -f kubernetes/rabbitmq/ingress.yaml --namespace rabbitmq
-      nslookup rabbitmq.docker.localhost $(minikube ip)
       ;;
     upgrade)
       helm upgrade rabbitmq bitnami/rabbitmq --values kubernetes/rabbitmq/values.yaml --namespace rabbitmq
@@ -81,6 +79,31 @@ rabbitmq () {
       helm delete rabbitmq
       kubectl delete -f kubernetes/rabbitmq/ingress.yaml --namespace rabbitmq
       kubectl delete -f kubernetes/rabbitmq/namespaces.yaml
+      ;;
+    *)
+      echo $"Usage: {install|upgrade|delete|info}"
+      exit 1
+  esac
+}
+
+grafana () {
+  case "$1" in
+    info)
+      kubectl --namespace=grafana get all
+      ;;
+    install)
+      setup
+      kubectl apply -f kubernetes/grafana/namespaces.yaml
+      helm install grafana bitnami/grafana --values kubernetes/grafana/values.yaml --namespace grafana
+      kubectl apply -f kubernetes/grafana/ingress.yaml --namespace grafana
+      ;;
+    upgrade)
+      helm upgrade grafana bitnami/grafana --values kubernetes/grafana/values.yaml --namespace grafana
+      ;;
+    delete)
+      helm delete grafana
+      kubectl delete -f kubernetes/grafana/ingress.yaml --namespace grafana
+      kubectl delete -f kubernetes/grafana/namespaces.yaml
       ;;
     *)
       echo $"Usage: {install|upgrade|delete|info}"
@@ -110,6 +133,10 @@ case "$1" in
 
   rabbitmq)
     rabbitmq $2
+    ;;
+
+  grafana)
+    grafana $2
     ;;
 
   *)
