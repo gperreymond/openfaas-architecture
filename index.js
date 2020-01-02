@@ -44,26 +44,34 @@ const broker = new ServiceBroker({
 })
 
 const start = async () => {
+  // Load all domains as services
   await broker.loadServices('./domains/dummy')
   // Get all aliases for metadata
   const services = broker.services
-  let aliases = {}
+  let aliases = {
+    async 'GET /hc' (req, res) {
+      const data = await req.$ctx.broker.call('$node.health')
+      res.setHeader('Content-Type', 'application/json; charset=utf-8')
+      res.writeHead(200)
+      res.end(JSON.stringify(data))
+    }
+  }
   services.map(service => {
-    aliases = { ...service.metadata.aliases }
+    aliases = { ...aliases, ...service.metadata.aliases }
   })
   // Load API Gateway
   broker.createService({
     mixins: [ApiService],
     settings: {
-      path: '/',
       routes: [{
+        path: '/',
         mappingPolicy: 'restrict',
         mergeParams: true,
         aliases
       }]
     }
   })
-  // Load all domains as services
+  // Start the broker
   await broker.start()
 }
 
