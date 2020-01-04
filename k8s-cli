@@ -20,7 +20,6 @@ openfaas () {
       kubectl apply -f kubernetes/openfaas/namespaces.yaml
       kubectl --namespace openfaas create secret generic basic-auth --from-literal=basic-auth-user=infra --from-literal=basic-auth-password=infra
       helm install openfaas openfaas/openfaas --values kubernetes/openfaas/values.yaml --namespace openfaas
-      kubectl apply -f kubernetes/openfaas/ingress.yaml --namespace openfaas
       ;;
     upgrade)
       setup
@@ -29,7 +28,6 @@ openfaas () {
     delete)
       helm delete openfaas
       kubectl delete --namespace openfaas secret basic-auth
-      kubectl delete -f kubernetes/openfaas/ingress.yaml --namespace openfaas
       kubectl delete -f kubernetes/openfaas/namespaces.yaml
       ;;
     *)
@@ -70,14 +68,12 @@ rabbitmq () {
       setup
       kubectl apply -f kubernetes/rabbitmq/namespaces.yaml
       helm install rabbitmq bitnami/rabbitmq --values kubernetes/rabbitmq/values.yaml --namespace rabbitmq
-      kubectl apply -f kubernetes/rabbitmq/ingress.yaml --namespace rabbitmq
       ;;
     upgrade)
       helm upgrade rabbitmq bitnami/rabbitmq --values kubernetes/rabbitmq/values.yaml --namespace rabbitmq
       ;;
     delete)
       helm delete rabbitmq
-      kubectl delete -f kubernetes/rabbitmq/ingress.yaml --namespace rabbitmq
       kubectl delete -f kubernetes/rabbitmq/namespaces.yaml
       ;;
     *)
@@ -95,14 +91,12 @@ grafana () {
       setup
       kubectl apply -f kubernetes/grafana/namespaces.yaml
       helm install grafana bitnami/grafana --values kubernetes/grafana/values.yaml --namespace grafana
-      kubectl apply -f kubernetes/grafana/ingress.yaml --namespace grafana
       ;;
     upgrade)
       helm upgrade grafana bitnami/grafana --values kubernetes/grafana/values.yaml --namespace grafana
       ;;
     delete)
       helm delete grafana
-      kubectl delete -f kubernetes/grafana/ingress.yaml --namespace grafana
       kubectl delete -f kubernetes/grafana/namespaces.yaml
       ;;
     *)
